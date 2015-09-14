@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="chapter1.fs" />
+    <Compile Include="math.fs" />
+    <Compile Include="Chapter2.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
