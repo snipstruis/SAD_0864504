@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "0864504_chapter_1_and_2", "0864504_chapter_1_and_2\0864504_chapter_1_and_2.fsproj", "{5C6E1C12-9EDF-41CF-BB72-97DFC3870F99}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "0864504_all_chapters", "0864504_all_chapters\0864504_all_chapters.fsproj", "{5C6E1C12-9EDF-41CF-BB72-97DFC3870F99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

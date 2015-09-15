@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
-    <Name>ffs balls</Name>
+    <Name>0864504_all_chapters</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +51,7 @@
     <Compile Include="chapter1.fs" />
     <Compile Include="math.fs" />
     <Compile Include="Chapter2.fs" />
+    <Compile Include="chapter3.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>

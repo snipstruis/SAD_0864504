@@ -10,5 +10,7 @@ let sim() =
 
 [<EntryPoint>]
 let main argv = 
-  do Chapter2.RocketSimulation.simulation()
+  //do sim()
+  //do Chapter2.RocketSimulation.simulation()
+  do Chapter3.SmallAsteroidFieldSimulation.simulation()
   0
