@@ -1,4 +1,5 @@
-﻿module CrappyMath
+﻿namespace Chapter2
+module Math =
   [<Measure>]
   type m
   [<Measure>]

@@ -2,7 +2,7 @@
 module RocketSimulation =
   open System
   open System.Threading
-  open CrappyMath
+  open Chapter2.Math
 
   type PhysicalEntity = {
     Position : Vec2<m>

@@ -1,8 +1,8 @@
-﻿module Chapter3
+﻿namespace Chapter3
 module SmallAsteroidFieldSimulation =
   open System
   open System.Threading
-  open CrappyMath
+  open Chapter2.Math
 
   type Asteroid =
     {

@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <Tailcalls>false</Tailcalls>
+    <Tailcalls>true</Tailcalls>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
@@ -49,9 +49,11 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="chapter1.fs" />
-    <Compile Include="math.fs" />
-    <Compile Include="Chapter2.fs" />
+    <Compile Include="chapter2.math.fs" />
+    <Compile Include="chapter2.fs" />
     <Compile Include="chapter3.fs" />
+    <Compile Include="chapter4.quadtree.fs" />
+    <Compile Include="chapter4.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
