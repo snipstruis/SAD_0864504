@@ -72,7 +72,7 @@ module SmallAsteroidFieldSimulation =
     let f  a = 
       let f' b =
         let x = not (a=b) // if not itself
-        let y = Vec2.Distance(a.Position,b.Position) < 5e6<m> // and within 500km
+        let y = Vec2.Distance(a.Position,b.Position) < 5e6<m> // and within 5000km
         x && y 
       if not (asteroids |> List.exists f') then
         true
