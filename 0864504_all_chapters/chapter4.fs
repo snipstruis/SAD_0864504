@@ -63,6 +63,48 @@
         }
 
     (*
+    We define an auxiliary function tha computes the local forces between a list of asteroids belonging to a leaf.
+    This function also adds (when its mass is not null) the global contribution of the barycenter of the other nodes.
+    *)
+    let local_forces (others:Barycenter) asteroid_group =
+      [
+        for a in asteroid_group do
+          let forces =
+               seq{
+                 for a' in asteroid_group do
+                   if a' <> a then
+                     yield force(a,a')
+               }
+          let F_local = Seq.sum forces
+          let F = 
+            if others.Mass < 0.01<_> then
+              F_local
+            else
+              F_local + force(a,others.ToAsteroid)
+          let p',v' = clamp(a.Position,a.Velocity)
+          yield
+            {
+              a with
+                  Position = p' + dt * v'
+                  Velocity = v' + dt * F / a.Mass
+            }
+      ]
+
+   (*
+    For each node of the tree, we traverse it. The barycenter of all the *other* nodes is added when traversing a node.
+    *)
+    let rec traverse (others:Barycenter, root) =
+      match root with
+      | QuadTree.Leaf(r,a,b) -> QuadTree.Leaf(r,local_forces others a, b)
+      | QuadTree.Node(r,q11,q12,q21,q22,b) ->
+        let params = others +/ q12.State +/ q21.State +/ q22.State, q11
+        let q11' = traverse params
+        let q12' = traverse (others +/ q11.State +/ q21.State +/ q22.State, q12)
+        let q21' = traverse (others +/ q12.State +/ q11.State +/ q22.State, q21)
+        let q22' = traverse (others +/ q12.State +/ q21.State +/ q11.State, q22)
+        QuadTree.Node(r,q11',q12',q21',q22',b)
+
+   (*
     The fast simulation takes as input a list of asteroids and returns as output the updated list.
     The steps are the following:
     - we create an empty tree
@@ -86,50 +128,9 @@
       let tree = tree |> QuadTree.fold (fun a b c d -> (a +/ b) +/ (c +/ d)) Barycenter.OfAsteroidList
 
       (*
-      We define an auxiliary function tha computes the local forces between a list of asteroids belonging to a leaf.
-      This function also adds (when its mass is not null) the global contribution of the barycenter of the other nodes.
-      *)
-      let local_forces (others:Barycenter) asteroid_group =
-        [
-          for a in asteroid_group do
-            let forces =
-                 seq{
-                   for a' in asteroid_group do
-                     if a' <> a then
-                       yield force(a,a')
-                 }
-            let F_local = Seq.sum forces
-            let F = 
-              if others.Mass < 0.01<_> then
-                F_local
-              else
-                F_local + force(a,others.ToAsteroid)
-            let p',v' = clamp(a.Position,a.Velocity)
-            yield
-              {
-                a with
-                    Position = p' + dt * v'
-                    Velocity = v' + dt * F / a.Mass
-              }
-        ]
-
-      (*
-      For each node of the tree, we traverse it. The barycenter of all the *other* nodes is added when traversing a node.
-      *)
-      let rec traverse (others:Barycenter) =
-        function
-        | QuadTree.Leaf(r,a,b) -> QuadTree.Leaf(r,local_forces others a, b)
-        | QuadTree.Node(r,q11,q12,q21,q22,b) ->
-          let q11' = traverse (others +/ q12.State +/ q21.State +/ q22.State) q11
-          let q12' = traverse (others +/ q11.State +/ q21.State +/ q22.State) q12
-          let q21' = traverse (others +/ q12.State +/ q11.State +/ q22.State) q21
-          let q22' = traverse (others +/ q12.State +/ q21.State +/ q11.State) q22
-          QuadTree.Node(r,q11',q12',q21',q22',b)
-
-      (*
       The final operation consists in traversing the tree, starting with an empty barycenter (null mass) and by converting the resulting tree into a list.
       *)
-      (traverse { Position = Vec2<_>.Zero; Mass = 0.0<_> } tree).ToList
+      (traverse ({ Position = Vec2<_>.Zero; Mass = 0.0<_> }, tree)).ToList
 
 
     (*
