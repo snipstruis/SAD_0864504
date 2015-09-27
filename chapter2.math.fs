@@ -25,3 +25,5 @@ module Math =
       member this.Length : float<'a> = sqrt((this.X*this.X+this.Y*this.Y))
       static member Distance (v1:Vec2<'a>,v2:Vec2<'a>) = (v1-v2).Length
       static member Normalize (v:Vec2<'a>):Vec2<1> = v/v.Length
+      member this.Normalized = this / this.Length
+      static member Dot(v1:Vec2<'a>,v2:Vec2<'a>) = v1.X * v2.X + v1.Y * v2.Y

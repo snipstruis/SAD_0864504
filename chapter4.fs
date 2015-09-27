@@ -97,8 +97,8 @@
       match root with
       | QuadTree.Leaf(r,a,b) -> QuadTree.Leaf(r,local_forces others a, b)
       | QuadTree.Node(r,q11,q12,q21,q22,b) ->
-        let params = others +/ q12.State +/ q21.State +/ q22.State, q11
-        let q11' = traverse params
+        let args = others +/ q12.State +/ q21.State +/ q22.State, q11
+        let q11' = traverse args
         let q12' = traverse (others +/ q11.State +/ q21.State +/ q22.State, q12)
         let q21' = traverse (others +/ q12.State +/ q11.State +/ q22.State, q21)
         let q22' = traverse (others +/ q12.State +/ q21.State +/ q11.State, q22)

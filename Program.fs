@@ -13,5 +13,6 @@ let main argv =
   //do sim()
   //do Chapter2.RocketSimulation.simulation()
   //do Chapter3.SmallAsteroidFieldSimulation.simulation()
-  do Chapter4.LargeAsteroidFieldSimulation.fast_simulation()
+  //do Chapter4.LargeAsteroidFieldSimulation.fast_simulation()
+  do Chapter5.PoliceChase.simulation()
   0
